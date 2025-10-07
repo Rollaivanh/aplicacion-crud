@@ -5,14 +5,18 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { createProduct } from "../products.api";
+import { useRouter } from "next/navigation";
 
 export function ProductForm() {
   const { register, handleSubmit } = useForm();
+  const router = useRouter()
   const onSubmit = handleSubmit(async (data) => {
     console.log(data)
     await createProduct({...data,
       price: parseFloat(data.price)
     })
+    router.push("/")
+    router.refresh()
   });
 
   return (
