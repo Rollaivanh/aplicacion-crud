@@ -9,6 +9,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+export const dynamic = "force-dynamic"
+
+
+
 async function HomePage() {
   const products = await getProducts();
 
@@ -22,10 +26,15 @@ async function HomePage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-        {products.map((product) => (
+        {products.map((product: any) => (
           <Card key={product.id}>
             <CardHeader>
-              <CardTitle>{product.name}</CardTitle>
+              <CardTitle className="flex justify-between">
+                {product.name}
+                <span className="text-sm font-bold text-gray-500">
+                 ${product.price} 
+                 </span>
+                   </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
               <img src={product.image} alt="" />
