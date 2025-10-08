@@ -10,17 +10,21 @@ import {
 import { ProductsService } from './products.service';
 import type { CreateProductDto } from './dto/create-product.dto';
 import type { UpdateProductDto } from './dto/update-product.dto';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Post()
+  @ApiOperation({ summary: 'Create a product' })
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
 
   @Get()
+  @ApiResponse({ status: 200, description: 'Return al products' })
   findAll() {
     return this.productsService.findAll();
   }
